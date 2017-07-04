@@ -8,8 +8,6 @@ solidity: Ethereum smart contracts
 tests: Jasmine unit test
 ```
 
-All information uploaded are provided for transparency and accountability.
-
 # SphereTokens
 
 Sphere token is a ERC20 standard token that encapsulates additional features to record and allocate received game fees. Revenue distribution architecture is stipulated under the interface:
@@ -21,15 +19,15 @@ contract CollectibleFeeToken {
 
     mapping(uint => uint) public roundFees;
 
-	mapping(uint => uint) public recordedCoinSupplyForRound;
+mapping(uint => uint) public recordedCoinSupplyForRound;
 
-	mapping(uint => mapping (address => uint)) public claimedFees;
+mapping(uint => mapping (address => uint)) public claimedFees;
 
-	mapping(address => uint) public lastClaimedRound;
+mapping(address => uint) public lastClaimedRound;
 
-	uint public latestRound = 0;
+uint public latestRound = 0;
 
-	uint public initialRound = 1;
+uint public initialRound = 1;
 
     function claimFees(address _owner);
 
@@ -68,5 +66,5 @@ contract BurnableToken {
 
 # SphereDAO
 
-
+Controls access to protected functions in SphereToken and SphereFragment. SphereDAO is responsible for storing actual ethers of reserves and fees from game. 
 
