@@ -44,18 +44,18 @@ Upon each transfer, the receipient's claimable fees are reset.
 
 ```diff
 for (uint i = lastClaimedRound[_owner] + 1; i <= latestRound; i++){
-			uint feeForRound = balances[_owner] * feePerUnitOfCoin(i);
-			if (feeForRound > claimedFees[i][_owner]) {
-				//Add unclaimed fees to reserves
-				uint unclaimedFees = min256(numCoins * feePerUnitOfCoin(i), safeSub(feeForRound, claimedFees[i][_owner]));
-				reserves = safeAdd(reserves, unclaimedFees);
-				claimedFees[i][_owner] = safeAdd(claimedFees[i][_owner], unclaimedFees);
-			}
-		}
-		for (uint x = lastClaimedRound[_receipient] + 1; x <= latestRound; x++){
-			//Empty fees for new receipient
-			claimedFees[x][_receipient] = safeAdd(claimedFees[x][_receipient], numCoins * feePerUnitOfCoin(x));
-		}
+    uint feeForRound = balances[_owner] * feePerUnitOfCoin(i);
+    if (feeForRound > claimedFees[i][_owner]) {
+        //Add unclaimed fees to reserves
+        uint unclaimedFees = min256(numCoins * feePerUnitOfCoin(i), safeSub(feeForRound, claimedFees[i][_owner]));
+        reserves = safeAdd(reserves, unclaimedFees);
+        claimedFees[i][_owner] = safeAdd(claimedFees[i][_owner], unclaimedFees);
+    }
+}
+for (uint x = lastClaimedRound[_receipient] + 1; x <= latestRound; x++){
+    //Empty fees for new receipient
+    claimedFees[x][_receipient] = safeAdd(claimedFees[x][_receipient], numCoins * feePerUnitOfCoin(x));
+}
 ```
 
 Burn functionality is added to allow reserve funds to be claimed by token holders.
