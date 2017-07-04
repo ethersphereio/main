@@ -19,7 +19,7 @@ contract CollectibleFeeToken {
 
     mapping(uint => uint) public roundFees;
 
-mapping(uint => uint) public recordedCoinSupplyForRound;
+    mapping(uint => uint) public recordedCoinSupplyForRound;
 
     mapping(uint => mapping (address => uint)) public claimedFees;
 
@@ -99,3 +99,27 @@ function claim();
 function claim(address target);
 ```
 
+# Testing
+
+Testing is essential in ensuring contracts run with 100% reliability and accuracy as required on a production application that is immutable on the blockchain. Issues related to smart contract creates not just hindrnace in user experience but security concerns that can lead to fund compromise. Therefore, it is important that testing is done properly and thoroughly.
+
+## Parity Dev
+
+Parity is used for running test node. Standard nodes require block confirmations created through mining in order for transactions to be processed. This delay in transaction processing from time of broadcast or transaction invocation creates a lot of asynchronous processing issues.
+
+In order to simplify testing, parity is run on dev mode with instant seal on to allow for instant transaction incorporation into the block. 
+
+```diff
+parity --chain dev
+```
+As such, all tests defined assume synchronous operation of blockchain calls.
+
+## Jasmine Testing Framework
+
+On top of managing the simulated Ethereum environment responsible for creating test transactions and hosting contracts, a test framework is also necessary. 
+
+```diff
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.6.1/jasmine.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.6.1/jasmine-html.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.6.1/boot.min.js"></script>
+```
