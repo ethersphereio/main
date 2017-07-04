@@ -40,7 +40,7 @@ contract CollectibleFeeToken {
 
 Due to memory and gas constraints, it is not possible to record all token holder information necessary for accurate distribution of revenue. A workaround is to record total fees and supply for each round, track all claim events and coin transfers to eventually determine the remaining funds claimable for each token holder.
 
-Upon each transfer, the receipient's claimable fees are reset.
+Upon each transfer, the receipient's claimable fees are reset and added to reserves.
 
 ```diff
 for (uint i = lastClaimedRound[_owner] + 1; i <= latestRound; i++){
