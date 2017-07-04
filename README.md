@@ -21,13 +21,13 @@ contract CollectibleFeeToken {
 
 mapping(uint => uint) public recordedCoinSupplyForRound;
 
-mapping(uint => mapping (address => uint)) public claimedFees;
+    mapping(uint => mapping (address => uint)) public claimedFees;
 
-mapping(address => uint) public lastClaimedRound;
+    mapping(address => uint) public lastClaimedRound;
 
-uint public latestRound = 0;
+    uint public latestRound = 0;
 
-uint public initialRound = 1;
+    uint public initialRound = 1;
 
     function claimFees(address _owner);
 
@@ -67,4 +67,35 @@ contract BurnableToken {
 # SphereDAO
 
 Controls access to protected functions in SphereToken and SphereFragment. SphereDAO is responsible for storing actual ethers of reserves and fees from game. 
+
+## Game authorization
+
+Only authorized games are allowed access to funds and can deposit fees/alter round records through the DAO. 
+
+```diff
+address[] public authorizedGameControllers;
+```
+
+## Fragment exchange
+
+The DAO also allows the exchange of fragments for tokens. In order to achieve this, the DAO is also inherently granted minting permissions from SphereToken. 
+
+```diff
+function exchangeFragments(uint amount);
+```
+
+## Claiming fees
+
+Fee information is stored in each token in order to allow transfer information to be incorporated into entitlement determination for each token holder. Actual revenue is first deposited by authorized games during reset.
+
+```diff
+function depositFee();
+```
+
+Addresses that invoke the claim fee functionality will cause the DAO to calculate fee entitlement amount and subsequently disburse a portion of its balance to the owner. Claiming of fee has to be manually invoked and gas paid for by the invoker.
+
+```diff
+function claim();
+function claim(address target);
+```
 
