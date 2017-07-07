@@ -121,7 +121,7 @@ function claim(address target);
 
 # Testing
 
-Testing is essential in ensuring contracts run with 100% reliability and accuracy as required on a production application that is immutable on the blockchain. Issues related to smart contract creates not just hindrnace in user experience but security concerns that can lead to fund compromise. Therefore, it is important that testing is done properly and thoroughly.
+Testing is essential in ensuring contracts run with 100% reliability and accuracy as required on a production application that is immutable on the blockchain. Issues related to smart contract creates not just hindrance in user experience but security concerns that can lead to fund compromise. Therefore, it is important that testing is done properly and thoroughly.
 
 ## Parity Dev
 
